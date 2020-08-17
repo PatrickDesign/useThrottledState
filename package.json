@@ -1,6 +1,6 @@
 {
   "name": "use-throttled-state",
-  "version": "0.0.1",
+  "version": "0.0.15",
   "description": "Drop-in replacement for &#x60;useState&#x60; with throttling capabilities.",
   "author": "@patrickDesign",
   "license": "MIT",
@@ -60,6 +60,7 @@
     "gh-pages": "^2.0.1",
     "jest-environment-jsdom-sixteen": "^1.0.3",
     "react": "^16.9.0",
+    "react-dom": "^16.13.1",
     "react-scripts": "^3.4.0",
     "react-test-renderer": "^16.9.0",
     "rollup": "^1.1.2",
@@ -70,7 +71,6 @@
     "rollup-plugin-url": "^2.1.0"
   },
   "dependencies": {
-    "lodash.throttle": "^4.1.1",
-    "react-dom": "^16.13.1"
+    "lodash.throttle": "^4.1.1"
   }
 }
