@@ -1,21 +1,19 @@
-import * as React from 'react'
+import { useEffect, useRef, useState } from "react";
+import throttle from "lodash.throttle";
 
-export const useMyHook = () => {
-  let [{
-    counter
-  }, setState] = React.useState({
-    counter: 0
-  })
+// Drop in replacement for useState with deepMerge built in
+// const [val, setVal] = useThrottledState(defaultValue, timeout, dispatchFunc)
+// val and setVal update immediately locally, but do not push updates
+// until dispatch runs
+const useThrottledState = (defaultVal, timeout, dispatch) => {
+  const [value, setValue] = useState(defaultVal);
 
-  React.useEffect(() => {
-    let interval = window.setInterval(() => {
-      counter++
-      setState({counter})
-    }, 1000)
-    return () => {
-      window.clearInterval(interval)
-    }
-  }, [])
+  const throttledFunc = useRef(throttle(dispatch, timeout)).current;
 
-  return counter
-}
+  useEffect(() => {
+    throttledFunc(value);
+  }, [value]);
+  return [value, setValue];
+};
+
+export default useThrottledState;

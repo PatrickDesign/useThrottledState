@@ -1,29 +1,33 @@
-import { useMyHook } from './'
-import { renderHook, act } from "@testing-library/react-hooks";
+import { waitFor } from "@testing-library/react";
+import { act, renderHook } from "@testing-library/react-hooks";
+import useThrottledState from "./";
 
-// mock timer using jest
-jest.useFakeTimers();
+describe("useThrottledState", () => {
+  it("", async () => {
+    const mockThrottledFunc = jest.fn();
+    const { result } = renderHook(() =>
+      useThrottledState(
+        {
+          data: "defaultValue",
+        },
+        500,
+        mockThrottledFunc
+      )
+    );
 
-describe('useMyHook', () => {
-  it('updates every second', () => {
-    const { result } = renderHook(() => useMyHook());
-
-    expect(result.current).toBe(0);
-
-    // Fast-forward 1sec
     act(() => {
-      jest.advanceTimersByTime(1000);
+      result.current[1]({ data: "newValue" });
+      result.current[1]({ data: "newValue2" });
     });
 
-    // Check after total 1 sec
-    expect(result.current).toBe(1);
+    //Test that we have most up-to-date value locally
+    expect(result.current[0].data).toBe("newValue2");
 
-    // Fast-forward 1 more sec
-    act(() => {
-      jest.advanceTimersByTime(1000);
+    //but our real setter has only been called once...
+    expect(mockThrottledFunc).toHaveBeenCalledTimes(1);
+
+    await waitFor(() => expect(mockThrottledFunc).toHaveBeenCalledTimes(2), {
+      timeout: 550,
     });
-
-    // Check after total 2 sec
-    expect(result.current).toBe(2);
-  })
-})
+  });
+});
