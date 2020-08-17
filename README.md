@@ -15,7 +15,7 @@ npm install --save use-throttled-state
 
 `useThrottledState` allows you to easily work with data locally while dispatching any updates to a worker function in the background. The worker function is only called once per `throttleRate` time interval.
 
-Here is a quick writeup with examples [](MEDIUM ARTICLE LINK HERE).
+Here is a [quick writeup with examples](https://medium.com/@patrickwees/throttle-expensive-user-input-processing-with-usethrottledstate-3d4e4e5a233e?sk=f52f6b38fe9cd1625c2f3373c657e711)!
 
 Interface:
 
