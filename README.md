@@ -1,6 +1,7 @@
 # use-throttled-state
 
-> Drop-in replacement for &#x60;useState&#x60; with throttling capabilities.
+> Drop-in replacement for &#x60;useState&#x60; with throttling capabilities. Access
+> local state immediately while dispatching data to worker functions at a throttled pace.
 
 [![NPM](https://img.shields.io/npm/v/use-throttled-state.svg)](https://www.npmjs.com/package/use-throttled-state) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
@@ -13,16 +14,31 @@ npm install --save use-throttled-state
 ## Usage
 
 ```jsx
-import React, { Component } from 'react'
+import React from "react";
 
-import { useMyHook } from 'use-throttled-state'
+import useThrottledState from "use-throttled-state";
+
+const doWork = (query) => {
+  //... do expensive work with the query ...
+  db.query(query);
+};
 
 const Example = () => {
-  const example = useMyHook()
+  const [searchQuery, setSearchQuery] = useThrottledState("", 550, doWork);
+
   return (
-    <div>{example}</div>
-  )
-}
+    <>
+      <input
+        id="query"
+        onChange={(event) => {
+          setSearchQuery(event.target.value);
+        }}
+        value={searchQuery}
+      />
+      <div>Local data: {searchQuery}</div>
+    </>
+  );
+};
 ```
 
 ## License
