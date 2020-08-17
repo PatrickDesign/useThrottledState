@@ -26,7 +26,7 @@ const [value, setValue] = useThrottledState(
   initialValue,
   throttleRate, // In milliseconds
   workerFunction
-);
+)
 ```
 
 Example with 500 ms `throttleRate`:

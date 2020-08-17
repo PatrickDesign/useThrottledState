@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import useThrottledState from "use-throttled-state";
+import React, { useState } from "react"
+import useThrottledState from "use-throttled-state"
 
 const App = () => {
-  const [queryState, setQueryState] = useState("");
+  const [queryState, setQueryState] = useState("")
 
-  const query = (query) => setQueryState(query);
+  const query = (query) => setQueryState(query)
 
-  const [searchQuery, setSearchQuery] = useThrottledState("", 550, query);
+  const [searchQuery, setSearchQuery] = useThrottledState("", 550, query)
 
   return (
     <>
@@ -14,7 +14,7 @@ const App = () => {
       <input
         id="query"
         onChange={(event) => {
-          setSearchQuery(event.target.value);
+          setSearchQuery(event.target.value)
         }}
         value={searchQuery}
       />
@@ -22,7 +22,7 @@ const App = () => {
       <div>Local data: {searchQuery} </div>
       <div>Delayed Result: {queryState}</div>
     </>
-  );
-};
+  )
+}
 
-export default App;
+export default App
