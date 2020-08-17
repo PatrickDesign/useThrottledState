@@ -19,8 +19,8 @@ const App = () => {
         value={searchQuery}
       />
       <div>Delay: 500ms</div>
-      <div>Local data:{searchQuery} </div>
-      <div>Result: {queryState}</div>
+      <div>Local data: {searchQuery} </div>
+      <div>Delayed Result: {queryState}</div>
     </>
   );
 };

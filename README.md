@@ -13,9 +13,30 @@ npm install --save use-throttled-state
 
 ## Usage
 
+`useThrottledState` allows you to easily work with data locally while dispatching any updates to a worker function in the background. The worker function is only called once per `throttleRate` time interval.
+
+Here is a quick writeup with examples [](MEDIUM ARTICLE LINK HERE)
+
+Interface:
+
+```js
+import useThrottledState from "use-throttled-state";
+
+const [value, setValue] = useThrottledState(
+  initialValue,
+  throttleRate, //ms
+  workerFunction
+);
+```
+
+Example with 500 ms `throttleRate`:
+![`useThrottledState` example with 500 ms throttleRate](https://snap.anedot.com/patrick.wees/screencast_2020-08-16_23-53-25.gif)
+
+vs. 2500 ms `throttleRate`:
+![`useThrottledState` example with 2500 ms throttleRate](https://snap.anedot.com/patrick.wees/screencast_2020-08-16_23-54-04.gif)
+
 ```jsx
 import React from "react";
-
 import useThrottledState from "use-throttled-state";
 
 const doWork = (query) => {
@@ -39,6 +60,24 @@ const Example = () => {
     </>
   );
 };
+```
+
+A common scenario is wanting to limit the number of context updates that occur as a user types. This setup might look like:
+
+```js
+import useThrottledState from "use-throttled-state";
+
+...
+
+const { setValueFromContext, valueFromContext } = useContext(SomeContext);
+
+const [localValue, setLocalValue] = useThrottledState(
+  valueFromContext,
+  500,
+  (newValue) => {
+    setValueFromContext(newValue);
+  }
+);
 ```
 
 ## License
