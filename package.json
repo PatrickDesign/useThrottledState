@@ -1,6 +1,6 @@
 {
   "name": "use-throttled-state",
-  "version": "0.0.15",
+  "version": "0.0.2",
   "description": "Drop-in replacement for &#x60;useState&#x60; with throttling capabilities.",
   "author": "@patrickDesign",
   "license": "MIT",
