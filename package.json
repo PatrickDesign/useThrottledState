@@ -1,10 +1,10 @@
 {
   "name": "use-throttled-state",
-  "version": "0.0.2",
+  "version": "0.0.21",
   "description": "Drop-in replacement for &#x60;useState&#x60; with throttling capabilities.",
   "author": "@patrickDesign",
   "license": "MIT",
-  "repository": "@patrickDesign/useThrottledState",
+  "repository": "https://github.com/PatrickDesign/useThrottledState",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",
